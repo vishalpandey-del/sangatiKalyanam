@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+/* ── Design tokens ─────────────────────────────────────────────
+   Ported from the original Sangati Kalyanam stylesheet so every
+   colour is available as a Tailwind utility (bg-teal, text-rose…). */
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --color-teal: #2d9b83;
+  --color-teal-m: #3db99e;
+  --color-teal-l: #e8f7f4;
+
+  --color-rose: #e8637a;
+  --color-rose-l: #fef0f2;
+
+  --color-amber: #f59e42;
+  --color-amber-l: #fef6e8;
+
+  --color-violet: #7c6fcd;
+  --color-violet-l: #f0eefa;
+
+  --color-slate: #1e293b;
+  --color-slate-m: #475569;
+  --color-slate-l: #94a3b8;
+
+  --color-surface: #f8fafc;
+  --color-line: #e2e8f0;
+
+  --radius-card: 16px;
+
+  --animate-fade-up: fade-up 0.22s ease;
+  --animate-toast-in: toast-in 0.25s ease;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-surface text-slate font-sans antialiased;
+  }
+
+  /* Slim scrollbars, matching the original design. */
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-thumb { background: var(--color-line); border-radius: 2px; }
+
+  /* Form controls inherit the page font rather than the UA default. */
+  button, input, select, textarea { font: inherit; }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-teal;
+  }
+}
+
+@layer components {
+  .card {
+    @apply w-full rounded-2xl border border-line bg-white p-6 transition-all duration-200;
+  }
+
+  .card-hover {
+    @apply hover:-translate-y-0.5 hover:border-teal/25 hover:shadow-[0_8px_28px_rgba(45,155,131,0.1)];
+  }
+
+  .btn {
+    @apply inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-[10px] border-0 px-[22px] py-2.5 text-sm font-semibold transition-all duration-150 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply bg-teal text-white shadow-[0_4px_14px_rgba(45,155,131,0.25)] hover:-translate-y-px hover:bg-teal-m;
+  }
+
+  .btn-outline {
+    @apply border-[1.5px] border-teal bg-transparent text-teal hover:bg-teal-l;
+  }
+
+  .btn-ghost {
+    @apply border border-line bg-surface text-slate-m hover:border-slate-m hover:text-slate;
+  }
+
+  .btn-sm { @apply rounded-[9px] px-3.5 py-1.5 text-xs; }
+  .btn-lg { @apply rounded-[11px] px-8 py-3.5 text-[15px]; }
+
+  .badge {
+    @apply inline-block rounded-full px-2.5 py-[3px] text-[11px] font-bold;
+  }
+
+  .tag {
+    @apply inline-block rounded-md border border-line bg-surface px-2 py-[3px] text-[11px] font-medium text-slate-m;
+  }
+
+  .field {
+    @apply w-full rounded-[10px] border-[1.5px] border-line px-3.5 py-2.5 text-sm text-slate outline-none transition-colors focus:border-teal;
+  }
+
+  .field-label {
+    @apply mb-1.5 block text-xs font-bold text-slate;
+  }
+}
